@@ -1,0 +1,7 @@
+// Binaries
+*x64
+
+// IDE files
+.idea
+.vs
+enc_temp_folder
