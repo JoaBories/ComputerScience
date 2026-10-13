@@ -59,6 +59,25 @@ namespace sort
     void merge(std::vector<int>& v);
     void quick(std::vector<int>& v);
     void heap(std::vector<int>& v);
+
+    /** return time in microsecond and print results, please don't use debugVector with big arrays **/
+    float testAlgorithm(std::vector<int> vector, void (*algorithm)(std::vector<int>&), bool debugVector = false);
+    
+    // Helpers
+    
+    /** take an array where [left mid] and [mid+1 right] are sorted and sort them on [left right], used by merge_sort **/
+    void merge_merge(std::vector<int>& v, size_t left, size_t mid, size_t right);
+    /** using recurrence, used to keep sort::merge as same api from others **/
+    void merge_sort(std::vector<int>& v, size_t leftLimit, size_t rightLimit);
+    
+    /** Lomuto's partition, used by quick_sort **/
+    int64_t quick_partition(std::vector<int>& v, int64_t low, int64_t high);
+    /** using recurrence, used to keep sort::merge as same api from others **/
+    void quick_sort(std::vector<int>& v, int64_t low, int64_t high);
+    
+    void heapify(std::vector<int>& v, size_t size, size_t root);
+    inline size_t heap_leftChild(const size_t index) { return 2 * index + 1; }
+    inline size_t heap_rightChild(const size_t index) { return 2 * index + 2; }
 }
 
 inline std::ostream& operator<<(std::ostream& os, const std::vector<int>& v)

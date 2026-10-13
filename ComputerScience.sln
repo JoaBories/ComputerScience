@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ComputerScience", "ComputerScience\ComputerScience.vcxproj", "{127CE04F-EC27-43A8-8C4A-BCD98F1CF7EB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlgoSort", "AlgoSort\AlgoSort.vcxproj", "{127CE04F-EC27-43A8-8C4A-BCD98F1CF7EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
