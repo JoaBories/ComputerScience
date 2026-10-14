@@ -14,13 +14,18 @@ int main(int argc, char* argv[])
     {
         Encode::TextFile file;
         Encode::read("test/bible.txt", file);
-        Encode::write("test/nc_bible.txt", file);
-    }, "control", Benchmark::TimePrecision::MilliSeconds);
+        Encode::write("test/ctrl_bible.txt", file);
+    }, "Control", Benchmark::TimePrecision::MilliSeconds);
     
-    Encode::TextFile file;
-    Encode::HcFile hcFile;
-    Encode::read("test/bible.txt", file);
-    Encode::hcEncode(file, hcFile);
+    Benchmark::benchPrint([&]
+    {
+        Encode::TextFile file;
+        Encode::HcFile hcFile;
+        
+        Encode::read("test/bible.txt", file);
+        Encode::hcEncode(file, hcFile);
+        Encode::write("test/hufftxt_bible.txt", hcFile);
+    }, "Huffman text", Benchmark::TimePrecision::MilliSeconds);
     
     return 0;
 }

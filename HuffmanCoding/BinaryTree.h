@@ -13,5 +13,7 @@ struct BinaryNode
     BinaryNode(const uint64_t occurence, BinaryNode* left, BinaryNode* right, const char c) :
         occurence(occurence), left(left), right(right), c(c) {}
     
+    ~BinaryNode();
+    
     static BinaryNode* constructFromCounts(const std::array<uint64_t, 256>& counts);
 };

@@ -11,6 +11,12 @@ namespace
     };
 }
 
+BinaryNode::~BinaryNode()
+{
+    if (left) delete left;
+    if (right) delete right;
+}
+
 BinaryNode* BinaryNode::constructFromCounts(const std::array<uint64_t, 256>& counts)
 {
     std::priority_queue<BinaryNode*, std::vector<BinaryNode*>, BinaryNodeComp> minHeap;

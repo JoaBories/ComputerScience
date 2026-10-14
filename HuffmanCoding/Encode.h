@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
+
 #include "BinaryTree.h"
 
 namespace Encode
@@ -16,12 +18,12 @@ namespace Encode
     /** Huffman coded file **/
     struct HcFile
     {
-        BinaryNode* treeRoot;
+        std::array<std::string, 256> codeMap;
+        std::string data;
     };
     
+    void write(const std::string& fileName, const HcFile& file);
+    
+    void dfsTraversal(const BinaryNode* root, std::array<std::string, 256>& codeMap, const std::string& code);
     void hcEncode(const TextFile& inFile, HcFile& outFile);
-    
-    
-    
-    
 }
