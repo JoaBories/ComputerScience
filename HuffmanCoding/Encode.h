@@ -15,31 +15,21 @@ namespace Encode
     void read(const std::string& fileName, TextFile& file);
     void write(const std::string& fileName, const TextFile& file);
     
+    struct HuffCode
+    {
+        uint64_t data = 0;
+        uint8_t size = 0;
+    };
+    
     /** Huffman coded file **/
     struct HcFile
     {
-        std::array<std::string, 256> codeMap;
-        std::vector<bool> data;
-    };
-    
-    class BinaryWriter
-    {
-    private:
-        char mBuffer;
-        int mCount;
-        std::ostream& mOutStream;
-        
-    public:
-        explicit BinaryWriter(std::ostream& outStream) : mBuffer(0), mCount(0), mOutStream(outStream) {}
-        
-        void writeToBuffer(bool bit);
-        void writeData(const std::vector<bool>& data);
-        
-        void flushBuffer();
+        std::array<HuffCode, 256> codeMap;
+        std::vector<char> data;
     };
     
     void write(const std::string& fileName, const HcFile& file);
     
-    void dfsTraversal(const BinaryNode* root, std::array<std::string, 256>& codeMap, const std::string& code);
-    void hcEncode(const TextFile& inFile, HcFile& outFile);
+    void dfsTraversal(const BinaryNode* root, std::array<HuffCode, 256>& codeMap, uint64_t bits, uint8_t len);
+    HcFile hcEncode(const TextFile& inFile);
 }

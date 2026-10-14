@@ -4,6 +4,8 @@
 #include "Encode.h"
 #include "Benchmark.h"
 
+using namespace Encode;
+
 int main(int argc, char* argv[])
 {
     std::cout << "/------------------------\\" << '\n';
@@ -13,19 +15,18 @@ int main(int argc, char* argv[])
 
     Benchmark::benchPrint([]
     {
-        Encode::TextFile file;
-        Encode::read("test/bible.txt", file);
-        Encode::write("test/ctrl_bible.txt", file);
+        TextFile file;
+        read("test/bible.txt", file);
+        write("test/ctrl_bible.txt", file);
     }, "Control", Benchmark::TimePrecision::MilliSeconds);
     
     Benchmark::benchPrint([&]
     {
-        Encode::TextFile file;
-        Encode::HcFile hcFile;
-        Encode::read("test/bible.txt", file);
-        
-        Encode::hcEncode(file, hcFile);
-        Encode::write("test/huff_bible.kili", hcFile);
+        TextFile file;
+        read("test/bible.txt", file);
+
+        const HcFile hcFile = hcEncode(file);
+        //write("test/huff_bible.kili", hcFile);
     }, "Huffman", Benchmark::TimePrecision::MilliSeconds);
     
     return 0;
