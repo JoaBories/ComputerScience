@@ -22,10 +22,10 @@ int main(int argc, char* argv[])
     {
         Encode::TextFile file;
         Encode::HcFile hcFile;
-        
         Encode::read("test/bible.txt", file);
+        
         Encode::hcEncode(file, hcFile);
-        Encode::write("test/huff_bible.txt", hcFile);
+        Encode::write("test/huff_bible.kili", hcFile);
     }, "Huffman", Benchmark::TimePrecision::MilliSeconds);
     
     return 0;
