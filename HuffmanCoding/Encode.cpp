@@ -27,12 +27,34 @@ namespace Encode
         fileOut.close();
     }
 
+    void BinaryWriter::writeToBuffer(bool bit)
+    {
+        mBuffer <<= 1;
+        mBuffer |= bit;
+        mCount++;
+        
+        if (mCount == 8) flushBuffer();
+    }
+
+    void BinaryWriter::writeData(const std::vector<bool>& data)
+    {
+        for (const bool b : data) writeToBuffer(b);
+    }
+
+    void BinaryWriter::flushBuffer()
+    {
+        mOutStream.put(mBuffer);
+        mBuffer = 0;
+        mCount = 0;
+    }
+
     void write(const std::string& fileName, const HcFile& file)
     {
         std::ofstream fileOut(fileName, std::ios::binary | std::ios::trunc);
         if (!fileOut) return;
 
-        fileOut.write(file.data.data(), file.data.size());
+        BinaryWriter writer(fileOut);
+        writer.writeData(file.data);
     
         fileOut.close();
     }
@@ -64,7 +86,10 @@ namespace Encode
         
         for (const char c : inFile.data)
         {
-            outFile.data += outFile.codeMap[c] + " ";
+            for (const char byte : outFile.codeMap[c])
+            {
+                outFile.data.emplace_back(byte == '1');
+            }
         }
     }
 }

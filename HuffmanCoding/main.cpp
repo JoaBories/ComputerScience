@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
     std::cout << "/------------------------\\" << '\n';
     std::cout << "| Testing Huffman coding |" << '\n';
     std::cout << "\\------------------------/" << '\n';
+    std::cout << '\n';
 
     Benchmark::benchPrint([]
     {
@@ -24,8 +25,8 @@ int main(int argc, char* argv[])
         
         Encode::read("test/bible.txt", file);
         Encode::hcEncode(file, hcFile);
-        Encode::write("test/hufftxt_bible.txt", hcFile);
-    }, "Huffman text", Benchmark::TimePrecision::MilliSeconds);
+        Encode::write("test/huff_bible.txt", hcFile);
+    }, "Huffman", Benchmark::TimePrecision::MilliSeconds);
     
     return 0;
 }

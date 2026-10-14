@@ -19,7 +19,23 @@ namespace Encode
     struct HcFile
     {
         std::array<std::string, 256> codeMap;
-        std::string data;
+        std::vector<bool> data;
+    };
+    
+    class BinaryWriter
+    {
+    private:
+        char mBuffer;
+        int mCount;
+        std::ostream& mOutStream;
+        
+    public:
+        explicit BinaryWriter(std::ostream& outStream) : mBuffer(0), mCount(0), mOutStream(outStream) {}
+        
+        void writeToBuffer(bool bit);
+        void writeData(const std::vector<bool>& data);
+        
+        void flushBuffer();
     };
     
     void write(const std::string& fileName, const HcFile& file);
